@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="card" style="width: 18rem;">
+              <img src="https://products.metalloinvest.com/upload/resize_cache/iblock/0f7/330_260_1/0f71a8b959437f23a9109843b33e479d.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{ customer_record.raw_material_name }}</h5>
+              </div>
+              <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Логин работника: {{ customer_record.employee_name }}</li>
+                <li class="list-group-item">Содержание железа: {{ customer_record.iron_concentration }}</li>
+                <li class="list-group-item">Содержание кремния: {{ customer_record.silicon_concentration }}</li>
+                <li class="list-group-item">Содержание алюминия: {{ customer_record.aluminum_concentration }}</li>
+                  <li class="list-group-item">Содержание кальция: {{ customer_record.calcium_concentration }}</li>
+                  <li class="list-group-item">Содержание серы: {{ customer_record.sulfur_concentration }}</li>
+                  <li class="list-group-item">Создано: {{ customer_record.created_at }}</li>
+
+              </ul>
+              <div class="card-body">
+                  <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+                <a href="{% url 'delete_record' customer_record.id %}" class="btn btn-primary">Delete</a>
+              </div>
+        </div>
+    {% endif %}
+{% endblock %}

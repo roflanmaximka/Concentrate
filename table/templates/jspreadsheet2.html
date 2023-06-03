@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<html>
+<script src="https://jspreadsheet.com/v9/jspreadsheet.js"></script>
+<script src="https://jsuites.net/v4/jsuites.js"></script>
+<link rel="stylesheet" href="https://jspreadsheet.com/v9/jspreadsheet.css" type="text/css" />
+<link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons" />
+
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.6.0/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@jspreadsheet/parser/dist/index.min.js"></script>
+
+<div id="spreadsheet"></div>
+
+<input type="file" name="file" id='file' onchange="load(event)" style='display:none'>
+
+<input type='button' value='Load a XLSX file from my local computer'
+    onclick="document.getElementById('file').click()">
+
+<script>
+// Set license
+jspreadsheet.setLicense('ZjlkODc5NTZjNTMzNzdmM2E3NzJlMGY1YjlmNzYwNzMxMjdlNjY2MzBmMzNjMDllNTRiMGQ3NDM4ZWI1ODZiZjg0YzZiMDllMGIzODc1ZWViNTI1ZTVjZjNkOGQ4YWFlNDJiODFmMjg3M2RmOGY1NGYwNDk5ZTVkNDVhY2ViM2IsZXlKdVlXMWxJam9pU25Od2NtVmhaSE5vWldWMElpd2laR0YwWlNJNk1UWTRNalUyTXpFNE1pd2laRzl0WVdsdUlqcGJJbXB6Y0hKbFlXUnphR1ZsZEM1amIyMGlMQ0pqYjJSbGMyRnVaR0p2ZUM1cGJ5SXNJbXB6YUdWc2JDNXVaWFFpTENKamMySXVZWEJ3SWl3aWJHOWpZV3hvYjNOMElsMHNJbkJzWVc0aU9pSXpJaXdpYzJOdmNHVWlPbHNpZGpjaUxDSjJPQ0lzSW5ZNUlpd2lZMmhoY25Seklpd2labTl5YlhNaUxDSm1iM0p0ZFd4aElpd2ljR0Z5YzJWeUlpd2ljbVZ1WkdWeUlpd2lZMjl0YldWdWRITWlMQ0pwYlhCdmNuUWlMQ0ppWVhJaUxDSjJZV3hwWkdGMGFXOXVjeUlzSW5ObFlYSmphQ0pkTENKa1pXMXZJanAwY25WbGZRPT0=');
+
+// Set extensions
+jspreadsheet.setExtensions({ parser });
+
+// Create the spreadsheet from a local file
+var load = function(e) {
+    // Parse XLSX file and create a new spreadsheet
+    jspreadsheet.parser({
+        file: e.target.files[0],
+        // It would be used to updated the formats only
+        locale: 'it-IT',
+        onload: function(config) {
+            jspreadsheet(document.getElementById('spreadsheet'), config);
+        },
+        onerror: function(error) {
+            alert(error);
+        }
+    });
+}
+</script>
+</html>
+
+{% endblock %}

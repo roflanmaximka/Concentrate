@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+
+    {% block content %}
+        {% if user.is_authenticated %}
+            <form method="POST" enctype="multipart/form-data" action="{% url 'add_excel_file' %}">
+                    {% csrf_token %}
+                <input type="file" name="excel_file">
+                <button type="submit">Import</button>
+            </form>
+        {% endif %}
+{% endblock %}

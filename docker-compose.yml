@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  concentrate_postgres:
+    image: postgres:15
+    container_name: concentrate_postgres
+    volumes:
+      - ~/.pg/pg_data/concentrate:/Library/PostgreSQL/13/data
+    env_file:
+      - .env
+  concentrate:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    command: python3 /usr/src/Concentrate/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/usr/src/Concentrate
+    ports:
+      - 8000:8000
+    depends_on:
+      - concentrate_postgres
+    env_file:
+      - .env
+

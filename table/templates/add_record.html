@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="col-md-6 offset-md-3">
+
+            <h1>Hello</h1><br/>
+
+            <form method="post" action="{% url 'add_record' %}">
+                {% csrf_token %}
+                {{ form.as_p }}<br/>
+                <button type="submit" class="btn btn-primary" >Добавить запись</button>
+            </form>
+
+        </div>
+    {% endif %}
+{% endblock %}

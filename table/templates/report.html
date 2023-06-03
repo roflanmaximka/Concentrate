@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+
+        <form method="GET" action="/report/">
+            <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Выберите месяц
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/report">Все месяца</a></li>
+                    <li><a class="dropdown-item" href="/report/?month=1">Январь</a></li>
+                    <li><a class="dropdown-item" href="/report/?month=2">Февраль</a></li>
+                    <li><a class="dropdown-item" href="/report/?month=3">Март</a></li>
+                    <li><a class="dropdown-item" href="/report/?month=4">Апрель</a></li>
+                    <li><a class="dropdown-item" href="/report/?month=5">Май</a></li>
+                    <li><a class="dropdown-item" href="/report/?month=6">Июнь</a></li>
+                    <li><a class="dropdown-item" href="/report/?month=7">Июль</a></li>
+                    <li><a class="dropdown-item" href="/report/?month=8">Август</a></li>
+                    <li><a class="dropdown-item" href="/report/?month=9">Сентябрь</a></li>
+                    <li><a class="dropdown-item" href="/report/?month=10">Октябрь</a></li>
+                    <li><a class="dropdown-item" href="/report/?month=11">Ноябрь</a></li>
+                    <li><a class="dropdown-item" href="/report/?month=12">Декабрь</a></li>
+                  </ul>
+            </div>
+                <input type="hidden" name="month" id="selected-month" value="">
+        </form><br>
+
+        <table class="table table-striped table-hover table-bordered">
+          <thead class="table-dark">
+            <tr>
+                <th scope="col">Логин работника</th>
+                <th scope="col">Наименование сырья</th>
+                <th scope="col">Содержание железа</th>
+                <th scope="col">Содержание кремния</th>
+                <th scope="col">Содержание алюминия</th>
+                <th scope="col">Содержание кальция</th>
+                <th scope="col">Содержание серы</th>
+                <th scope="col">Создано</th>
+                <th scope="col">ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if records %}
+                {% for record in records %}
+                    <tr>
+                        <td>{{ record.employee_name }}</td>
+                        <td>{{ record.raw_material_name }}</td>
+                        <td>{{ record.iron_concentration }}%</td>
+                        <td>{{ record.silicon_concentration }}%</td>
+                        <td>{{ record.aluminum_concentration }}%</td>
+                        <td>{{ record.calcium_concentration }}%</td>
+                        <td>{{ record.sulfur_concentration }}%</td>
+                        <td>{{ record.created_at }}</td>
+                        <td><a href="{% url 'record' record.id %}">{{ record.id }}</a></td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+          </tbody>
+        </table><br>
+
+        <h2>Отчётная таблица за {{ month_name }}</h2>
+        <table class="table table-striped table-hover table-bordered">
+          <thead class="table-dark">
+            <tr>
+                <th scope="col">Наименование сырья</th>
+                <th scope="col">Минимальное значение</th>
+                <th scope="col">Среднее значение</th>
+                <th scope="col">Максимальное значение</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {% if aggregation_data %}
+                {% for field, data in aggregation_data.items %}
+                    <tr>
+                        <td>{{ field }}</td>
+                        <td>{{ data.min_value|floatformat:2 }}%</td> # floatformat нужен для ограничения символов после запятой
+                        <td>{{ data.avg_value|floatformat:2 }}%</td>
+                        <td>{{ data.max_value|floatformat:2 }}%</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+
+          </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+    {% if user.is_authenticated %} <!--Проверка логирования//-->
+
+        <table class="table table-striped table-hover table-bordered">
+          <thead class="table-dark">
+            <tr>
+                <th scope="col">Логин работника</th>
+                <th scope="col">Наименование сырья</th>
+                <th scope="col">Содержание железа</th>
+                <th scope="col">Содержание кремния</th>
+                <th scope="col">Содержание алюминия</th>
+                <th scope="col">Содержание кальция</th>
+                <th scope="col">Содержание серы</th>
+                <th scope="col">Создано</th>
+                <th scope="col">ID</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {% if records %}  <!--Перебираем записи для отображения//-->
+                {% for record in records %}
+                    <tr>
+                        <td>{{ record.employee_name }}</td>
+                        <td>{{ record.raw_material_name }}</td>
+                        <td>{{ record.iron_concentration }}%</td>
+                        <td>{{ record.silicon_concentration }}%</td>
+                        <td>{{ record.aluminum_concentration }}%</td>
+                        <td>{{ record.calcium_concentration }}%</td>
+                        <td>{{ record.sulfur_concentration }}%</td>
+                        <td>{{ record.created_at }}</td>
+                        <td><a href="{% url 'record' record.id %}">{{ record.id }}</a></td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+          </tbody>
+        </table>
+
+        {% else %}
+        <div class="col-md-6 offset-md-3">
+
+        <h1>Login</h1>
+        <br/>
+        <form method="post" action="{% url 'home' %}">
+            {% csrf_token %}
+            <form>
+  <div class="mb-3">
+    <input type="text" class="form-control" name="username" placeholder="Username" required>
+  </div>
+  <div class="mb-3">
+    <input type="password" class="form-control" name="password" placeholder="Password" required>
+  </div> <br/>
+  <button type="submit" class="btn btn-primary">Login</button>
+</form>
+        </form>
+{% endif %}
+{% endblock %}
+</div>
