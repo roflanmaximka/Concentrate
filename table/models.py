@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import Min, Avg, Max
 
 
 class Record(models.Model): #Модель для записи в БД, в которой мы определяем поля
