@@ -19,7 +19,7 @@ class AddRecordForm(forms.ModelForm): # Класс формы для и отоб
     sulfur_concentration = forms.CharField(required=True, widget=forms.widgets.TextInput
         (attrs={"placeholder": "Содержание серы", "class": "form-control"}), label="")
 
-    class Meta: #Класс Meta переопределяющий класс
+    class Meta: #Сериализатор
         model = Record #От какой модели наследуемся
         fields = '__all__' #Здесь указываем либо fields для отображения тех полей, которые на нужны,
                            #либо except для отображения все полей за исключением тех, которые мы укажем

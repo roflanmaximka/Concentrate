@@ -12,5 +12,5 @@ class Record(models.Model): #Модель для записи в БД, в кот
     sulfur_concentration = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self): #То что мы выводим после того как используем модель в .html
+    def __str__(self): #Для наглядного отображения имени объекта
         return f"{self.raw_material_name}"
