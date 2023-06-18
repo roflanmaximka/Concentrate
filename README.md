@@ -1,6 +1,7 @@
 # Iron Ore Concentrates Web Interface
 
 ## 🔎 Preview
+![](images/home.png)
 
 ## 🚀 Features
 
