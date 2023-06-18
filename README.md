@@ -1,4 +1,4 @@
-# Iron Ore Concentrates Web Interface
+# Ore Concentrates Web Interface
 
 ## 🔎 Preview
 ![](images/home.png)
@@ -14,9 +14,9 @@
 ## ✅ Usage 
 
 ### 📝 Add a record
-- Go to the home page, click "Add entry" in the header
+- Go to the home page, click "Add record" in the header
 - Fill out the form with the name of the raw material and the content of each component.
-- Click the "Add Entry" button
+- Click the "Add record" button
 ![](images/add_record.png)
 
 ### 👀 View reports
