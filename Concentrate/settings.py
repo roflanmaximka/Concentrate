@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'table',
+    'rest_framework',
 ]
 
 STATIC_URL = "static/"

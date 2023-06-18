@@ -1,4 +1,6 @@
 from django.urls import path
+from rest_framework.routers import SimpleRouter
+
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -12,4 +14,4 @@ urlpatterns = [
     path('report/', views.report, name='report'),
     path('add_excel_file/', views.add_excel_file, name='add_excel_file')
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]

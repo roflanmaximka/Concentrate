@@ -3,16 +3,36 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-        <div class="col-md-6 offset-md-3">
+        <div class="col-md-6 offset-md-4">
 
-            <h1>Hello</h1><br/>
+            <h1>Форма добавления записи</h1><br/>
 
             <form method="post" action="{% url 'add_record' %}">
                 {% csrf_token %}
-                {{ form.as_p }}<br/>
-                <button type="submit" class="btn btn-primary" >Добавить запись</button>
-            </form>
+                <table>
+                    {{ form.non_field_errors }}
+                    {% for field in form.visible_fields %}
+                        <tr>
+                            <td>{{ field }}<br></td>
+                        </tr>
+                    {% endfor %}
+                </table>
 
+                <button type="submit" class="btn btn-primary">Добавить запись</button>
+            </form>
         </div>
+
+{#            <form method="post" action="{% url 'add_record' %}">#}
+{#                {% csrf_token %}#}
+{#                {{ form.employee_name.as_hidden }}<br/>#}
+{#                {{ form.raw_material_name }}<br/>#}
+{#                {{ form.iron_concentration }}<br/>#}
+{#                {{ form.silicon_concentration }}<br/>#}
+{#                {{ form.aluminum_concentration }}<br/>#}
+{#                {{ form.calcium_concentration }}<br/>#}
+{#                {{ form.sulfur_concentration }}<br/>#}
+{#                <button type="submit" class="btn btn-primary" >Добавить запись</button>#}
+{#            </form>#}
+
     {% endif %}
 {% endblock %}
